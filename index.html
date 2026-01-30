@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            background: #0e0e0e;
+            color: #00ffcc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timer">--:--.---</div>
+
+<script>
+    // 🔒 FIXED END TIME (23:48 + 18 minutes = 00:06)
+    const endTime = new Date();
+    endTime.setHours(0, 6, 0, 0); // 00:06:00.000
+
+    // If current time is already past midnight, keep next midnight logic safe
+    if (Date.now() > endTime.getTime()) {
+        endTime.setDate(endTime.getDate() + 1);
+    }
+
+    const display = document.getElementById("timer");
+
+    function update() {
+        const now = Date.now();
+        const remaining = endTime.getTime() - now;
+
+        if (remaining <= 0) {
+            display.textContent = "00:00.000";
+            return;
+        }
+
+        const minutes = Math.floor(remaining / 60000);
+        const seconds = Math.floor((remaining % 60000) / 1000);
+        const milliseconds = remaining % 1000;
+
+        display.textContent =
+            `${String(minutes).padStart(2, "0")}:` +
+            `${String(seconds).padStart(2, "0")}.` +
+            `${String(milliseconds).padStart(3, "0")}`;
+
+        requestAnimationFrame(update);
+    }
+
+    update();
+</script>
+
+</body>
+</html>
