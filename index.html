@@ -22,11 +22,11 @@
 <div id="timer">--:--.---</div>
 
 <script>
-    // 🔒 FIXED GLOBAL END TIME: 00:06:46.000
+    // 🔒 FIXED GLOBAL END TIME: 00:06:43.000
     const endTime = new Date();
-    endTime.setHours(0, 6, 46, 0);
+    endTime.setHours(0, 6, 43, 0);
 
-    // If already past today's 00:06:46, target next day
+    // If already past today's 00:06:43, target next day
     if (Date.now() > endTime.getTime()) {
         endTime.setDate(endTime.getDate() + 1);
     }
